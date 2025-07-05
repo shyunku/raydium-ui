@@ -18,19 +18,20 @@ import { ACCOUNT_LAYOUT, MINT_LAYOUT } from '@/utils/layouts'
 import { TOKENS } from '@/utils/tokens'
 import BigNumber from 'bignumber.js'
 
-export let SOLANA_RPC_URL: string = 'http://localhost:8899' // 기본값 설정
-
-export const setSolanaRpcUrl = (url: string) => {
-  SOLANA_RPC_URL = url
+export const web3Config: {
+  strategy: string
+  rpcs: { url: string; weight: number }[] // 이 부분을 추가하여 타입을 명시합니다.
+} = {
+  strategy: 'speed',
+  rpcs: [
+    // 이 배열은 plugins/web3.ts에서 동적으로 채워질 것입니다.
+    // 초기에는 비워두거나, 기존의 하드코딩된 값을 유지할 수 있습니다.
+    // 예시: { url: 'https://raydium.rpcpool.com', weight: 80 }
+  ]
 }
 
-export const getConnection = (commitment: Commitment = 'confirmed'): Connection => {
-  return new Connection(SOLANA_RPC_URL, commitment)
-}
-
-export const web3Config = {
-  strategy: 'speed', // 이 전략은 직접 URL을 사용함으로써 무시됩니다.
-  rpcs: [] // 이 목록은 비워둡니다. SOLANA_RPC_URL을 직접 사용할 것입니다.
+export const createWeb3Instance = (endpoint: string, commitment: Commitment = 'confirmed'): Connection => {
+  return new Connection(endpoint, commitment)
 }
 
 // export const commitment: Commitment = 'processed'
