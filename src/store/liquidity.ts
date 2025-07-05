@@ -77,21 +77,21 @@ export const mutations = mutationTree(state, {
   }
 })
 
-interface tokenItemApi {
+interface TokenItemApi {
   [mint: string]: {
     symbol: string
     decimals: number
     icon: string
   }
 }
-interface tokenApi {
-  official: tokenItemApi
-  unOfficial: tokenItemApi
+export interface TokenApi {
+  official: TokenItemApi
+  unOfficial: TokenItemApi
   blacklist: string[]
 }
 
-async function updateToken(axios: any) {
-  const tokens: tokenApi = await axios.get('https://api.raydium.io/v1/main/token')
+async function updateToken(api: any) {
+  const tokens: TokenApi = await api.getTokens()
   for (const itemTokenMint of Object.keys(tokens.official)) {
     const itemToken = tokens.official[itemTokenMint]
     const knownTokenInfo = Object.entries(TOKENS).find((item) => item[1].mintAddress === itemTokenMint)
@@ -243,11 +243,10 @@ function checkLiquidity(poolInfos: { [poolId: string]: liquidityItemApi }, offic
     } else {
       for (let itemIndex = 0; itemIndex < LIQUIDITY_POOLS.length; itemIndex += 1) {
         if (
-          LIQUIDITY_POOLS[itemIndex].ammId === itemLiquidity.ammId && (
-            LIQUIDITY_POOLS[itemIndex].name !== itemLiquidity.name ||
+          LIQUIDITY_POOLS[itemIndex].ammId === itemLiquidity.ammId &&
+          (LIQUIDITY_POOLS[itemIndex].name !== itemLiquidity.name ||
             LIQUIDITY_POOLS[itemIndex].official !== itemLiquidity.official ||
-            LIQUIDITY_POOLS[itemIndex].serumMarket !== itemLiquidity.serumMarket
-          )
+            LIQUIDITY_POOLS[itemIndex].serumMarket !== itemLiquidity.serumMarket)
         ) {
           LIQUIDITY_POOLS[itemIndex] = itemLiquidity
         }
@@ -264,7 +263,7 @@ export const actions = actionTree(
 
       const conn = this.$web3
 
-      await updateToken(this.$axios)
+      await updateToken(this.$api)
 
       const liquidityApiInfo: liquidityApi = await this.$axios.get('https://api.raydium.io/v1/main/liquidity')
       checkLiquidity(liquidityApiInfo.official, true)
