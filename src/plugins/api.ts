@@ -11,6 +11,7 @@ const apiPlugin: Plugin = (ctx, inject) => {
     getInfo: () => ctx.$axios.get(`${$config.raydiumApiServerHost}/v1/main/info`),
     getPairs: () => ctx.$axios.get(`${$config.raydiumApiServerHost}/v1/main/pairs`),
     getTokens: () => ctx.$axios.get(`${$config.raydiumApiServerHost}/v1/main/token`),
+    getLiquidity: () => ctx.$axios.get(`${$config.raydiumApiServerHost}/v1/main/liquidity`),
     getConfig: () => ctx.$axios.get(`${$config.raydiumApiServerHost}/v1/main/config`, { params: { v: VERSION } }),
     getEpochInfo: (rpc: string) => ctx.$axios.post(rpc, { jsonrpc: '2.0', id: 1, method: 'getEpochInfo' }),
     getCompaign: ({ campaignId = 2, address, referral }) =>

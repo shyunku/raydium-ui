@@ -160,7 +160,7 @@ interface liquidityItemApi {
   serumPcVaultAccount: string
   serumVaultSigner: string
 }
-interface liquidityApi {
+export interface LiquidityApi {
   official: { [poolId: string]: liquidityItemApi }
   unOfficial: { [poolId: string]: liquidityItemApi }
 }
@@ -265,7 +265,7 @@ export const actions = actionTree(
 
       await updateToken(this.$api)
 
-      const liquidityApiInfo: liquidityApi = await this.$axios.get('https://api.raydium.io/v1/main/liquidity')
+      const liquidityApiInfo: LiquidityApi = await this.$api.getLiquidity()
       checkLiquidity(liquidityApiInfo.official, true)
       checkLiquidity(liquidityApiInfo.unOfficial, false)
 

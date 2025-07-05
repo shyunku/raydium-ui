@@ -1,4 +1,4 @@
-import { TokenApi } from '@/store/liquidity'
+import { LiquidityApi, TokenApi } from '@/store/liquidity'
 
 /* eslint-disable camelcase */
 export interface PricesData {
@@ -86,6 +86,7 @@ export interface NuxtApiInstance {
   getInfo: () => Promise<InfoData>
   getPairs: () => Promise<{ data: PairData[] }>
   getTokens: () => Promise<TokenApi>
+  getLiquidity: () => Promise<LiquidityApi>
   getConfig: () => Promise<ConfigData>
   getEpochInfo: (rpc: string) => Promise<EpochInfo>
   getCompaign: (param: {
