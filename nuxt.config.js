@@ -18,7 +18,8 @@ export default {
   // show
   publicRuntimeConfig: {
     // baseURL: process.env.NUXT_BASE_URL
-    solanaRpcHost: process.env.SOLANA_RPC_HOST || 'http://localhost:8899'
+    solanaRpcHost: process.env.SOLANA_RPC_HOST || 'http://localhost:8899',
+    raydiumApiServerHost: process.env.RAYDIUM_API_SERVER_HOST || 'https://api.raydium.io'
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
