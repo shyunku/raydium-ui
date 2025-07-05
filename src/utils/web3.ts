@@ -18,13 +18,19 @@ import { ACCOUNT_LAYOUT, MINT_LAYOUT } from '@/utils/layouts'
 import { TOKENS } from '@/utils/tokens'
 import BigNumber from 'bignumber.js'
 
+export let SOLANA_RPC_URL: string = 'http://localhost:8899' // 기본값 설정
+
+export const setSolanaRpcUrl = (url: string) => {
+  SOLANA_RPC_URL = url
+}
+
+export const getConnection = (commitment: Commitment = 'confirmed'): Connection => {
+  return new Connection(SOLANA_RPC_URL, commitment)
+}
+
 export const web3Config = {
-  strategy: 'speed',
-  rpcs: [
-    { url: 'https://raydium.rpcpool.com', weight: 80 },
-    { url: 'https://solana-api.projectserum.com', weight: 10 },
-    { url: 'https://solana-api.tt-prod.net', weight: 10 }
-  ]
+  strategy: 'speed', // 이 전략은 직접 URL을 사용함으로써 무시됩니다.
+  rpcs: [] // 이 목록은 비워둡니다. SOLANA_RPC_URL을 직접 사용할 것입니다.
 }
 
 // export const commitment: Commitment = 'processed'

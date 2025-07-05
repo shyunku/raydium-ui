@@ -6,7 +6,7 @@
     "build": "nuxt build",
     "build-analyze": "nuxt build --analyze",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "generate": "NODE_OPTIONS=--openssl-legacy-provider nuxt generate",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{less,vue}\" --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style",
@@ -51,6 +51,7 @@
     "core-js": "^3.20.1",
     "enquire.js": "^2.1.6",
     "lodash-es": "^4.17.21",
+    "node-gyp": "^11.2.0",
     "nuxt": "^2.15.8",
     "nuxt-clipboard": "^0.0.6",
     "nuxt-property-decorator": "^2.9.1",
@@ -90,5 +91,6 @@
     "stylelint-config-standard": "^24.0.0",
     "ts-jest": "^27.1.2",
     "vue-jest": "^3.0.7"
-  }
+  },
+  "packageManager": "yarn@3.3.1+sha512.e355f587284d06d2c0c1c2259c68746aa1f1f6cdeedefce543cec206709beeb7951c0a27cdbfb7b5736a576854829af9c660bbe82052192c49f108a546994b71"
 }

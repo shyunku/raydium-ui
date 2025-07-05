@@ -16,7 +16,10 @@ export default {
   target: 'static',
 
   // show
-  // publicRuntimeConfig: { baseURL: process.env.NUXT_BASE_URL },
+  publicRuntimeConfig: {
+    // baseURL: process.env.NUXT_BASE_URL
+    solanaRpcHost: process.env.SOLANA_RPC_HOST || 'http://localhost:8899'
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
